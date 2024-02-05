@@ -418,3 +418,14 @@ if ( ! empty( $_REQUEST['action'] ) ) {
 	 */
 	do_action( "admin_action_{$action}" );
 }
+
+function truong_custom_setup() {
+    echo 'Hello, Pham Nhu Nhat Truong';
+}
+add_action('truong_content_dashboard', 'truong_custom_setup');
+
+function truong_custom_the_title($title) {
+    return 'Truong custom title' . $title;
+}
+add_filter('the_title', 'truong_custom_the_title');
+

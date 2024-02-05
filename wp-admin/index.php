@@ -138,8 +138,24 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 ?>
 
 <div class="wrap">
+    <h2><?php do_action('truong_content_dashboard'); ?></h2>
 	<h1><?php echo esc_html( $title ); ?></h1>
+    <?php
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'truong';
 
+        $results = $wpdb->get_results( "SELECT * FROM $table_name", OBJECT );
+
+        if ($results) {
+            foreach ( $results as $result ) {
+                echo '<h2>' . $result->name . '</h2>';
+                echo '<h2>' . $result->content . '</h2>';
+            }
+        } else {
+            echo 'No data';
+        }
+
+    ?>
 	<?php
 	if ( ! empty( $_GET['admin_email_remind_later'] ) ) :
 		/** This filter is documented in wp-login.php */
